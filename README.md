@@ -1,2 +1,6 @@
 # SEPP-prototype
-SEPP-2024-Prototype
+Beginning of Project
+---------------------------------------
+Idea: ???
+Language: Python or Java
+
