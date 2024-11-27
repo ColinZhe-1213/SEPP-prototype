@@ -36,7 +36,7 @@ Simulate OTP Validation:<br>
 Upon entering the OTP, simulate an API call to validate the OTP using the mock backend (via an internal function, not a real API).<br>
 Simulate Smart Door Unlock:<br>
 Based on the validation result, display a message indicating whether the door is unlocked (success) or not (failure).<br>
-PIC: [Your name]<br>
+PIC: Keng Xiang<br>
 
 3. API Developer:<br>
 Set up a mock REST API<br>
