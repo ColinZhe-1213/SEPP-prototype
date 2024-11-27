@@ -58,7 +58,9 @@ Documentation<br>
 
 ---------------------------------------
 Work Updates:
+
 Back end Development:
+
 Part 1:
 
 
@@ -70,6 +72,7 @@ Part 2:
 
 
 Front-end Development:
+
 Part 1:
 
 
