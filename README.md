@@ -17,7 +17,7 @@ Part 2: Implement OTP Validation<br>
 Create an API endpoint to handle OTP validation requests.<br>
 Validate OTP by checking it against the stored value in the cloud.<br>
 Record the OTP validation process (timestamp, status) and update the counter for the next OTP.<br>
-PIC: [Your name]<br>
+PIC: [Colin]<br>
 
 2. Frontend Development:<br>
 Part 1: SSH App Simulation<br>
@@ -45,7 +45,7 @@ POST /generate_otp: Accepts user ID, returns generated OTP.<br>
 POST /validate_otp: Accepts OTP and user ID, returns validation status.<br>
 Integrate backend OTP functions into these endpoints.<br>
 Test the endpoints using Postman or another API testing tool. Verify that the OTPs are correctly generated and validated.<br>
-PIC: [API Developer’s name]<br>
+PIC: [Max]<br>
 
 4. Testing and documentation:<br>
 Unit Testing<br>
