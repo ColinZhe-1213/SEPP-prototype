@@ -1,7 +1,7 @@
 # SEPP-prototype
 Beginning of Project
 ---------------------------------------
-Idea: ???
+Idea: 
 Language: Python or Java
 ---------------------------------------
 Work unit distribution:
