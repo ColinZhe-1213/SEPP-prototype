@@ -17,7 +17,7 @@ Part 2: Implement OTP Validation<br>
 Create an API endpoint to handle OTP validation requests.<br>
 Validate OTP by checking it against the stored value in the cloud.<br>
 Record the OTP validation process (timestamp, status) and update the counter for the next OTP.<br>
-PIC: [Your name]<br>
+PIC: Colin<br>
 
 <strong>Frontend Development:</strong><br>
 
@@ -37,7 +37,7 @@ Simulate OTP Validation:<br>
 Upon entering the OTP, simulate an API call to validate the OTP using the mock backend (via an internal function, not a real API).<br>
 Simulate Smart Door Unlock:<br>
 Based on the validation result, display a message indicating whether the door is unlocked (success) or not (failure).<br>
-PIC: [Your name]<br>
+PIC: Keng Xiang <br>
 
 <strong>API Developer:</strong><br>
 Set up a mock REST API<br>
@@ -46,7 +46,7 @@ POST /generate_otp: Accepts user ID, returns generated OTP.<br>
 POST /validate_otp: Accepts OTP and user ID, returns validation status.<br>
 Integrate backend OTP functions into these endpoints.<br>
 Test the endpoints using Postman or another API testing tool. Verify that the OTPs are correctly generated and validated.<br>
-PIC: [API Developer’s name]<br>
+PIC: Max <br>
 
 <strong>Testing and documentation:</strong><br>
 Unit Testing<br>
