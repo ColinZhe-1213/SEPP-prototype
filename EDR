@@ -1,0 +1,93 @@
+SSH : Smart Delivery Management System(OTP generation and validation)
+Engineering Design Review
+Author: Colin Chong Kai Zhe
+Introduction
+Overview:
+E-commerce has grown exponentially over the decades where users prefer to purchase goods online rather than from retails shop. In student accommodations, difficulties are being shown regarding to parcel deliveries. As it’s a shared living space, it is common for  delivery courier to proceed with unattended delivery, where they leave parcels at the doorstep or unsafe areas putting the parcel at risk for theft or damage. The current system implies a flaw in the delivery system, where the parcels are exposed at public sight when unattended deliveries occurs. The main reasons these problem occurs is because students are usually not around during parcel delivery times due to lectures/labs. Furthermore, there’s no proper secure storage for handling these deliveries and communal trust between the house members which leads to leaving parcels at unattended area risky. The current SSH products such as SSH hub, camera and app have help with home management but so far there isn’t a specific solution that deal with safe deliveries.
+Proposed Solution:
+Therefore, we proposed the smart delivery management system that allows parcel to be delivered securely. The system we proposed consists of 3 primary components which are SSH Cloud, SSH Hub and the SSH app. OTP generation and generation will be handle by the SSH Cloud, whilst SSH Hub will serve as an communication bridge between the smart door and the cloud and lastly the App for users to request for an OTP. The flow of the process is such where user request an OTP, OTP generated and user can copy & send to their assigned delivery personnel, upon arriving, delivery personnel input the OTP and the OTP will be validated. If it’s validate, the smart door will unlock else it remains lock. The details sequence flow will be listed under design review.
+Goals and Non-Goals
+Goals: 
+1.	Decrease in loss or damage of parcel: Reduce the rate by 70% in the first year after implementation compare to the year before.
+2.	Generation and Validation of OTP: Ensure where OTP must be generate when users request via the app and delivery personnel is able to access the main door via the generated OTP. This feature will be consider a success if there’s a 90% rate of success usage.
+Non-Goals:
+1.	Integration with external apps: We are not integrating our system with external apps to generate OTP automatically if there’s a delivery scheduled. Users are required to generate OTP manually when they received a notification for delivery scheduled via 3rd party apps.
+2.	We are not enhancing the security system in the house as a whole but instead we are just focusing on the main door access to ease the delivery process when there’s no one around without risking parcel loss or damage.
+Design Overview: 
+Sequence diagram for the process:
+
+ 
+System Architecture and Functions for each component.
+SSH Cloud: 
+The SSH cloud serves as the central system, where its roles include generating and validation of OTP and  store all the records of the OTP. 
+OTP generation: Upon receiving a request for OTP by the users via the app, it will generates an unique OTP via HMAC-One-time password algorithm(HOTP). The reason we are using HOTP is due to we can’t be sure if users are free to generate OTP on the exact time when the delivery personnel is there, hence, HOTP is not time sensitive and won’t expire until it’s used. Therefore, when the user receive a notification regarding there might be a delivery, they can generate the OTP beforehand and send it to the delivery personnel. The OTP is created by a secret key that the server and the device agree on, followed by a counter that will increased each time an OTP is requested. 
+OTP storage: All OTPs that has been generated and used will be store in the cloud database to prevent the same code is being regenerated. Alongside with the OTPs, user ID(username) , timestamp for requesting and usage of OTP, the countervalue and its status. With these info, we are able to obtain a concise record of each OTP’s lifecycle and able to trace down when each OTP is generated and used. A example of how the record will be shown in the database will be:
+LogID	OTP	UserID	OTP request	OTP used	CounterValue	Status
+01	123501	Chong	2024-10-1 08:00:00	2024-10-1 14:30:00	2	Validated
+
+OTP validation: The OTP validation process start by the cloud receiving a validation request which is passed by the SSH hub. Upon receiving the request, the cloud will generates its own OTP using the secret key stored and the counter and checks whether the OTP input matches. Upon validation, the timestamp where it’s used will then be record into the logs and the cloud will increase the counter next time the user generates a new OTP.
+SSH HUB: 
+The SSH hub will be acting as a bridge between the smart door and the cloud. Its main role is to manage OTP transmission and provide commands to the smart door.
+OTP Transmission: OTPs are being transmitted to SSH hub via https ensuring that data are encrypted. The communication between SSH hub and the cloud is managed by SSH cloud where it assigns a Restful API just for OTP requests. After receiving an OTP, the OTP will be stored temporarily in the cache. The OTP stored in cache are used for verifying whether they received the latest OTPs generated by the cloud and are ready to validate the codes input. 
+Validation Process and Unlock Door Mechanism: The process begins with delivery personnel enter the OTP on the smart door keypad. After inputting, SSH hub will receive the entered OTP and immediately, it will be passed on to the cloud for validation process. While waiting for SSH cloud to handle to validation, SSH hub will compared the OTP inputted with the OTP in cache to ensure correct OTP is being processed.  When receiving a validation responds from the cloud, the SSH hub will pass an unlock command to the smart door to allow access for delivery personnel.
+SSH APP:
+The SSH app is serve mainly as a platform for users to generate OTP and view OTP logs.
+OTP request: Users will request for an OTP via the app. Upon requesting, the app will establish a connection with the cloud and send the request. Then, SSH cloud will proceed with the request and generate the OTP. Once the generation is completed, OTP will be send back to the app and display it to the user, allowing them to share with the delivery personnel. 
+OTP Logs: Users are able to view the OTP logs if they want to ensure the OTPs generated are used correctly. However, users will only be able to view the OTP logs of themselves only instead of everyone. When the user requests to view the log, the app will send a request to the cloud, where it will fetch the relevant data based on userID in the app and the userID column in the database and display the information. The log display will be shown as below as an example:
+
+LogID	OTP	OTP request	OTP used	CounterValue	Validations
+01	123501	2024-10-1 08:00:00	2024-10-1 14:30:00	2	Validated
+
+Alternatives:
+1.	Delivery lockers: 
+Concept: Our idea is to put a delivery locker outside of the house to allow delivery personnel to drop the parcels into the locker instead of accessing the house. This concept is inspired by traditional mailbox design, where the locker will have a number of storage compartments each assigned to an individual user. The delivery personnel will put the parcel into the compartments and only the intended recipient will be able to retrieve their own parcel via their SSH app to unlock the compartment door.
+Pros: Enhanced security – Since the locker is based out of the house, residents will not need to worry about their privacy and security issues such as strangers getting into the house.
+          Simple operations – As the mechanism of the whole process is straightforward, it will be easy to use for both the users and the delivery personnel.
+          Private access – Each compartment will be assigned to a respective user, so only the respective user can unlock his/her compartment to access his/her deliveries.
+Cons: High cost – Purchase and install the locker will be much more costly comparing to  simpler delivery methods without the need of installing new hardware.
+          Limited space(compartment) – Large parcels or high amount of parcels may not be able to fit into the compartments, leading them to expose to public. Hence, it does not fulfill with our goals for secure parcel delivery.
+          Limited space(outside) – The locker will be placed outside of the house but not all housing area have enough space at the compound which cause the idea not feasible for all the student housing.
+2.	AI detection for delivery personnel without generating OTP:
+Concept: The AI detection concept is such that we uses the AI facial and object recognition features in the SSH camera to detect delivery personnel and open the door to allow entry for them to drop off the parcel inside without the need of OTP access.
+Pros: Reduce user hassles – By implementing AI detection, users will not need to worry on their delivery schedules as the delivery process will be fully automated. Hence, users are able to continue to their daily plans without being interrupted.
+          Flexibility –  AI is able to identify different delivery personnel such by analyzing uniform patterns or logos printed making it to be universal instead of just a specific one. In future, the AI will just need to undergo machine learning updates for detection of new personnel type without any physical upgrades and save cost.  
+Cons: Security Concerns – AI possess a risk of misidentifying individuals as delivery personnel, possessing a risk to unauthorized access and might cause safety issues to users.
+           High developing cost – It’s costly to developed and maintaining an AI that can fully identify an authorized personnel. It involves in higher specs camera, advance machine learning model, enabling AI to accurately identify delivery personnel and constant updates to ensure the AI is reliable.
+3.	Static access code:
+Concept: The concept is such there’s this fixed code that allows everyone to enter when they input the code at the main door.
+Pros: It’s easy to use for both delivery personnel and user without the hassle of generating OTP each time.
+Cons: The code is fix and it possess risk to unauthorize access due to the nature of it is reusable .
+Milestone:
+Milestone 1: Milestone 1 will be focusing on developing the backend logic of OTP generation and validation in SSH cloud. It involves in creating API endpoints and the used of HOTP algorithm to generates and validates the OTP. 
+Milestone 2: Milestone 2 will be focusing on integration between the SSH cloud, SSH hub and the smart door. It involves where the OTP input on the smart door will be pass to SSH cloud for validation via the SSH Hub and the results will be pass it back to the Hub and followed by a giving appropriate command to the smart door based on the validation results.
+Milestone 3: Milestone 3 will focus on modifying the SSH app, ensuring necessary features are available. The process involve generating a user friendly UI for requesting OTP and viewing logs function.
+Milestone 4: Milestone 4 involves in creating a database to store all the OTP generated and allows easy retrieval when users request to view the logs from their app. It involves designing a database schema, writing queries that allows users to view OTP logs efficiently. 
+Milestone 5: Milestone 5 will be the last milestone where we conduct a full system integration and end-to-end testing. The goal is to ensure milestone 1-4 work as expected, ensuring the process to work seamlessly. Our focus is to ensure the communications between each components are stable when it’s implemented. 
+Dependencies:
+1.	UI team: This team will be focusing on designing the SSH app interface, ensuring the all the features are included into the app and implement the new interface into the app.
+2.	Cloud and database team: This team will be focusing on managing storage for generated OTP. They will make sure the relevant data(logs) are store safely into the cloud and allowing users to retrieve it when needed.
+3.	Backend team: This team will be developing the core system, primarily OTP generation and validation process. Besides, they will also implement API endpoints for communications between each components.
+4.	Testing team: This team will carried out test to ensure the system are working properly. 
+Cost:
+The proposed design are not expected to increase in the operating costs as we are using back the components which are available and modify them to fits into our system. The notable expenses for the solution proposed will likely be on the cloud storage, where we increase its capacity in order to store the OTP logs. However, if the expenses in increasing cloud storage become significant, we will perhaps filter the OTP logs and only keep the recent 30 days of records. Besides, we are expecting a slight increase in server load due to generation and validation of OTP codes so there might be a need to obtain extra server however, we expects that the current sever capacity is still enough. Nevertheless, the operation cost should be still within limits despite of the upgrades.
+Privacy and security concern:
+Privacy: To ensure the integrity of data, all data including OTPs and user data will be encrypted via AES-256. Transferring of data will be employed using https during communications between server and users. Besides, each user will be only to access and view the OTP logs related to them only. This is to ensure where their personal data will remain confidential.
+Security concern:  Security concern for this proposal is where users might be worried on reusable of OTP or unauthorized activity will be carried out after the OTP is being validated.
+Risk:
+Risk	Mitigations
+Integration errors between components leading to communication issues, causing system not working as expected.	Have a “testing” team to ensure all components are compatibility to each other.
+Access code might be reused leads to unauthorize access. 	We used one time passcode(OTP) for each delivery and it will expires immediately after use. 
+Users might worried for suspicious activity occur for allowing delivery personnel enter the house	We might implement SSH camera to records the process and allow live monitoring.
+Network failure leading to system failure	We might implement local validation process, where the validation took place on the SSH hub instead of SSH cloud.
+OTP is not time sensitive and may leads to replay attack	Implement TOTP to only allows the OTP valid in a specific window
+Sensitive data in OTP logs might be exposed if compromise. 	These data will be encrypted using AES-256 and using https for transmission.
+Supportive Materials:
+1.	1Kosmos (2023) What Is an HMAC-Based One-Time Password (HOTP)? How it Works - 1Kosmos. https://www.1kosmos.com/security-glossary/hmac-based-one-time-password-hotp/. 
+2.	Eman, R.D., Jahan, M. and Kabir, U. (2023) 'A multi‐device user authentication mechanism for Internet of Things,' IET Networks, 12(5), pp. 229–249. https://doi.org/10.1049/ntw2.12088. 
+3.	GeeksforGeeks (2023) One Time Password (OTP) algorithm in Cryptography. https://www.geeksforgeeks.org/one-time-password-otp-algorithm-in-cryptography/. 
+4.	Shukla, S. et al. (2022) OTP BASED SMART WIRELESS LOCK SYSTEM, INTERNATIONAL JOURNAL OF PROGRESSIVE RESEARCH IN ENGINEERING MANAGEMENT AND SCIENCE (IJPREMS). journal-article, pp. 47–50. https://www.ijprems.com/uploadedfiles/paper//_issue_4_april_2022/98/final/fin_ijprems1657460852.pdf. 
+5.	SuperTokens (no date) The difference between OTP, TOTP and HOTP. https://supertokens.com/blog/otp-vs-totp-vs-hotp#:~:text=Drawbacks%20of%20HOTP,used%20within%20the%20allowable%20window. 
+
+
+
+
