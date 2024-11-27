@@ -1,51 +1,51 @@
 # SEPP-prototype
 Beginning of Project
 ---------------------------------------
-Idea: 
-Language: Python or Java
+Idea: OTP generation & validation
+Language: Python
 ---------------------------------------
 Work unit distribution:
 
 1. Backend Development:<br>
-Part 1: Implement OTP Generation
-Design OTP generation using HMAC and a secret key.
-Implement a mock version of SSH Cloud with a REST API to simulate OTP generation.
-Ensure OTP generation responds with the OTP (and user ID as input).
-Simulate storing OTPs in a mock cloud database.
+Part 1: Implement OTP Generation<br>
+Design OTP generation using HMAC and a secret key.<br>
+Implement a mock version of SSH Cloud with a REST API to simulate OTP generation.<br>
+Ensure OTP generation responds with the OTP (and user ID as input).<br>
+Simulate storing OTPs in a mock cloud database.<br>
 
-Part 2: Implement OTP Validation
-Create an API endpoint to handle OTP validation requests.
-Validate OTP by checking it against the stored value in the cloud.
-Record the OTP validation process (timestamp, status) and update the counter for the next OTP.
-PIC: [Your name]
+Part 2: Implement OTP Validation<br>
+Create an API endpoint to handle OTP validation requests.<br>
+Validate OTP by checking it against the stored value in the cloud.<br>
+Record the OTP validation process (timestamp, status) and update the counter for the next OTP.<br>
+PIC: [Your name]<br>
 
 2. Frontend Development:<br>
-Part 1: SSH App Simulation
-Hard-code OTP Request Function:
-Simulate a user requesting an OTP with a mock user ID.
-Simulate the OTP generation through a function call (instead of making an actual API request).
-Simulate Displaying OTP:
-After generating the OTP, display it as if it came from the backend (mock API).
-Simulate Sharing OTP with Delivery Personnel:
-The app should display the OTP, simulating the process of sending it to delivery personnel.
+Part 1: SSH App Simulation<br>
+Hard-code OTP Request Function:<br>
+Simulate a user requesting an OTP with a mock user ID.<br>
+Simulate the OTP generation through a function call (instead of making an actual API request).<br>
+Simulate Displaying OTP:<br>
+After generating the OTP, display it as if it came from the backend (mock API).<br>
+Simulate Sharing OTP with Delivery Personnel:<br>
+The app should display the OTP, simulating the process of sending it to delivery personnel.<br>
 
-Part 2: Delivery Personnel Simulation
-Simulate OTP Entry:
-Simulate the delivery personnel entering the OTP into a CLI interface.
-Simulate OTP Validation:
-Upon entering the OTP, simulate an API call to validate the OTP using the mock backend (via an internal function, not a real API).
-Simulate Smart Door Unlock:
-Based on the validation result, display a message indicating whether the door is unlocked (success) or not (failure).
-PIC: [Your name]
+Part 2: Delivery Personnel Simulation<br>
+Simulate OTP Entry:<br>
+Simulate the delivery personnel entering the OTP into a CLI interface.<br>
+Simulate OTP Validation:<br>
+Upon entering the OTP, simulate an API call to validate the OTP using the mock backend (via an internal function, not a real API).<br>
+Simulate Smart Door Unlock:<br>
+Based on the validation result, display a message indicating whether the door is unlocked (success) or not (failure).<br>
+PIC: [Your name]<br>
 
 3. API Developer:<br>
-Set up a mock REST API
-Set up two POST endpoints:
-POST /generate_otp: Accepts user ID, returns generated OTP.
-POST /validate_otp: Accepts OTP and user ID, returns validation status.
-Integrate backend OTP functions into these endpoints.
-Test the endpoints using Postman or another API testing tool. Verify that the OTPs are correctly generated and validated.
-PIC: [API Developer’s name]
+Set up a mock REST API<br>
+Set up two POST endpoints:<br>
+POST /generate_otp: Accepts user ID, returns generated OTP.<br>
+POST /validate_otp: Accepts OTP and user ID, returns validation status.<br>
+Integrate backend OTP functions into these endpoints.<br>
+Test the endpoints using Postman or another API testing tool. Verify that the OTPs are correctly generated and validated.<br>
+PIC: [API Developer’s name]<br>
 
 4. Testing and documentation:<br>
 Unit Testing<br>
