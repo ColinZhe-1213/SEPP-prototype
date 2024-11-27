@@ -6,7 +6,7 @@ Language: Python<br>
 ---------------------------------------
 Work unit distribution:
 
-1. Backend Development:<br>
+<strong>Backend Development:</strong><br>
 Part 1: Implement OTP Generation<br>
 Design OTP generation using HMAC and a secret key.<br>
 Implement a mock version of SSH Cloud with a REST API to simulate OTP generation.<br>
@@ -19,7 +19,8 @@ Validate OTP by checking it against the stored value in the cloud.<br>
 Record the OTP validation process (timestamp, status) and update the counter for the next OTP.<br>
 PIC: [Your name]<br>
 
-2. Frontend Development:<br>
+<strong>Frontend Development:</strong><br>
+
 Part 1: SSH App Simulation<br>
 Hard-code OTP Request Function:<br>
 Simulate a user requesting an OTP with a mock user ID.<br>
@@ -38,7 +39,7 @@ Simulate Smart Door Unlock:<br>
 Based on the validation result, display a message indicating whether the door is unlocked (success) or not (failure).<br>
 PIC: [Your name]<br>
 
-3. API Developer:<br>
+<strong>API Developer:</strong><br>
 Set up a mock REST API<br>
 Set up two POST endpoints:<br>
 POST /generate_otp: Accepts user ID, returns generated OTP.<br>
@@ -47,7 +48,7 @@ Integrate backend OTP functions into these endpoints.<br>
 Test the endpoints using Postman or another API testing tool. Verify that the OTPs are correctly generated and validated.<br>
 PIC: [API Developer’s name]<br>
 
-4. Testing and documentation:<br>
+<strong>Testing and documentation:</strong><br>
 Unit Testing<br>
 * Each person in charge will need to test if each part of their code is running.(Individually testing)<br>
 End-to-End Testing<br>
