@@ -52,10 +52,8 @@ Documentation<br>
 Work Updates:
 
 Back end Development:
-
-
 Part 1:
-
+Start the skeleton fram for OTP geenration(HOTP method)
 
 
 
