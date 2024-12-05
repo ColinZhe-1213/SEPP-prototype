@@ -16,6 +16,6 @@ test:
 clean:
 	rm -rf __pycache__ .pytest_cache
 
-# Run Linting (optional, requires flake8 or other linting tools)
+# Lint for identifying code error
 lint:
 	$(PYTHON) -m flake8 $(SRC_DIR)
