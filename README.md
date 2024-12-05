@@ -7,6 +7,8 @@ Language: Python<br>
 Work unit distribution:
 * We are modifying the prototype into a more consice idea where we just focus on the core concept which is OTP geenration and validation while we used "Smart door unlocking" as our test environment but it will be carried out in terms of CLI instead of GUI.
 
+Before creating main structure, we are creating a <strong>MAKEFILE<strong> first for automating tasks.
+
 <strong>Backend Development:</strong><br>
 Part 1: Implement OTP Generation<br>
 Responsibilities:<br>
@@ -16,7 +18,7 @@ Time-based OTP (Optional for Phase 2):If you have time, implement an expiry mech
 Deliverables:<br>
 A function that securely generates a random 6-digit OTP using HOTP.<br>
 Unit tests for OTP generation to ensure randomness and security.<br>
-PIC: <name> <br>
+PIC: Colin <br>
 
 Part 2: Implement OTP Validation<br>
 Responsibilities:<br>
@@ -27,7 +29,7 @@ Error Handling: Handle incorrect or expired OTP scenarios. Provide feedback to t
 Deliverables:<br>
 A function to validate OTPs with proper error handling.<br>
 Unit tests for OTP validation, including edge cases like incorrect input or expired OTPs (if implemented).<br>
-PIC:<name><br>
+PIC: Keng <br>
 
 <strong>CLI Interface & User Flow:</strong><br>
 Responsibilities:<br>
@@ -38,7 +40,7 @@ Control Flow: Ensure the CLI gives the correct sequence of prompts and responses
 Deliverables:<br>
 A CLI application that allows users to generate and validate OTPs.<br>
 Clear prompts and outputs simulating the smart door environment.<br>
-PIC:<name <br>
+PIC: Max <br>
 
 <strong>Testing and documentation:</strong><br>
 Unit Testing<br>
