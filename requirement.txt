@@ -1,1 +1,3 @@
 pytest==7.0.1
+pyotp>=2.6.0
+colorama>=0.4.6 #CLI enhancement
