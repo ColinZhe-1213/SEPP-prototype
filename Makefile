@@ -1,5 +1,5 @@
 # Python environment settings
-PYTHON = python3
+PYTHON = python3.12
 PIP = pip3
 TEST_DIR = testfile
 SRC_DIR = code
