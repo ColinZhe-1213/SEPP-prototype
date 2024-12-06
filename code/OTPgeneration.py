@@ -1,6 +1,7 @@
 import pyotp
 from cryptography.fernet import Fernet
 
+
 class OTPgeneration:
     # Initialize
     def __init__(self):
@@ -14,13 +15,15 @@ class OTPgeneration:
     
     #Encrypt OTP Secret
     def encrypt_OTPsecret(self,OTP):
-        encrypted = self.fernet.encrypt(OTP.encode())
+        fernet = Fernet(self.encryption_key)
+        encrypted = fernet.encrypt(OTP.encode())
         return encrypted
     
     #Decrypt OTP Secret
     def decrypt_OTPsecret(self,OTP):
-        decrypted = self.fernet.decrypt(OTP)
-        return decrypted.decode()
+        fernet = Fernet(self.decryption_key)
+        decrypted = fernet.decrypt(OTP)
+        return decrypted
      
     #Add user
     def add_user(self,username):
@@ -39,9 +42,9 @@ class OTPgeneration:
     def delete_user(self, username):
         if username in self.users:
             del self.users[username]
-            print("User " + username + " deleted successfully.")
+            print(f"User {username} deleted successfully.")
         else:
-            print("User " + username + " not found.")
+            print(f"User {username} not found.")
     
     #Generate OTP for each user
     def generateOTP(self,username):

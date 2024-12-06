@@ -18,6 +18,7 @@ test:
 clean:
 	@echo "Cleaning files"
 	rm -rf __pycache__ .pytest_cache
+	rm -rf $(SRC_DIR)/__pycache__
 
 # Lint for identifying code error
 lint:

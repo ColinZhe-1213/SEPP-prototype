@@ -31,15 +31,10 @@ A function to validate OTPs with proper error handling.<br>
 Unit tests for OTP validation, including edge cases like incorrect input or expired OTPs (if implemented).<br>
 PIC: Keng <br>
 
-<strong>CLI Interface & User Flow:</strong><br>
+<strong>CLI Interface:</strong><br>
 Responsibilities:<br>
-CLI Interface: Build a simple command-line interface that allows users to either generate an OTP or validate it.<br>
-Input Handling: Capture user input for generating or validating OTP.<br>
-Output Feedback: Provide feedback after OTP generation and validation (success or failure).(using smart door concept)<br>
-Control Flow: Ensure the CLI gives the correct sequence of prompts and responses to the user.<br>
-Deliverables:<br>
-A CLI application that allows users to generate and validate OTPs.<br>
-Clear prompts and outputs simulating the smart door environment.<br>
+CLI Interface: Build a simple command-line interface that serves as user interface for interacting with the system that can accomdoate multiple users to manage OTP generation and validation. OTP generation and validation logic will be linked to respective class and not under the CLI class. Door unlocking simulation will be used as a response for successful OTP validation. Also due to multiple user, we will be testing whether all the generated OTPs will be successfully validated instead of each OTP may only be validated by an individual user that generated it.
+
 PIC: Max <br>
 
 <strong>Testing and documentation:</strong><br>
@@ -51,7 +46,8 @@ Documentation<br>
 * updates on the work units, including any changes in approach, results of evaluations, etc. as appropriate.(Done individually)<br>
 
 ---------------------------------------
-Work Updates:
+Work Updates:<br>
+Make File has been created but some features are not working so it requires fixing.<br>
 
 Back end Development:
 Part 1:
@@ -60,7 +56,7 @@ Start the skeleton fram for OTP geenration(HOTP method)
 
 
 
-Part 2:
+Part 2:<br>
 
 
 
