@@ -60,6 +60,7 @@ class OTPgeneration:
             otp = hotp.at(counter)
             self.users[username]['counter'] += 1
             return otp
-        
+
+
         
 
