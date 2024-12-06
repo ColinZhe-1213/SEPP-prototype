@@ -49,9 +49,10 @@ Documentation<br>
 Work Updates:<br>
 Make File has been created but some features are not working so it requires fixing.<br>
 
-Back end Development:<br>
-Part 1:<br>
-Base code for OTPgeneration completed. Working on test file for OTP geenration.
+Back end Development:
+Part 1:
+Start the skeleton fram for OTP geenration(HOTP method)
+
 
 
 
@@ -59,4 +60,4 @@ Part 2:<br>
 
 
 
-CLI Interface:<br>
+CLI Interface & User Flow:
