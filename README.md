@@ -31,7 +31,7 @@ A function to validate OTPs with proper error handling.<br>
 Unit tests for OTP validation, including edge cases like incorrect input or expired OTPs (if implemented).<br>
 PIC: Keng <br>
 
-<strong>CLI Interface & User Flow:</strong><br>
+<strong>CLI Interface:</strong><br>
 Responsibilities:<br>
 CLI Interface: Build a simple command-line interface that allows users to either generate an OTP or validate it.<br>
 Input Handling: Capture user input for generating or validating OTP.<br>
@@ -55,7 +55,7 @@ Work Updates:
 
 Back end Development:
 Part 1:
-Start the skeleton fram for OTP geenration(HOTP method)
+Base code for OTPgeneration completed. Working on test file for OTP geenration.
 
 
 
@@ -64,4 +64,4 @@ Part 2:
 
 
 
-CLI Interface & User Flow:
+CLI Interface:
