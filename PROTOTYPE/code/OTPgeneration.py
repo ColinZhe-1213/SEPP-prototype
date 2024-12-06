@@ -1,7 +1,6 @@
 import pyotp
 from cryptography.fernet import Fernet
 
-
 class OTPgeneration:
     # Initialize
     def __init__(self):
