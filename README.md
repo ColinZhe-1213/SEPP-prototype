@@ -33,7 +33,7 @@ PIC: Keng <br>
 
 <strong>CLI Interface:</strong><br>
 Responsibilities:<br>
-CLI Interface: Build a simple command-line interface that serves as user interface for interacting with the system that can accomdoate multiple users to manage OTP generation and validation. Door unlocking simulation will be used as a response for successful OTP validation. Also due to multiple user, we will be testing whether all the generated OTPs will be successfully validated instead of each OTP may only be validated by an individual user that egenrated it.
+CLI Interface: Build a simple command-line interface that serves as user interface for interacting with the system that can accomdoate multiple users to manage OTP generation and validation. Door unlocking simulation will be used as a response for successful OTP validation. Also due to multiple user, we will be testing whether all the generated OTPs will be successfully validated instead of each OTP may only be validated by an individual user that generated it.
 
 PIC: Max <br>
 
