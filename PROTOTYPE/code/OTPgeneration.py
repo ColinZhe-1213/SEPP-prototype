@@ -14,15 +14,13 @@ class OTPgeneration:
     
     #Encrypt OTP Secret
     def encrypt_OTPsecret(self,OTP):
-        fernet = Fernet(self.encryption_key)
-        encrypted = fernet.encrypt(OTP.encode())
+        encrypted = self.fernet.encrypt(OTP.encode())
         return encrypted
     
     #Decrypt OTP Secret
     def decrypt_OTPsecret(self,OTP):
-        fernet = Fernet(self.decryption_key)
-        decrypted = fernet.decrypt(OTP)
-        return decrypted
+        decrypted = self.fernet.decrypt(OTP)
+        return decrypted.decode()
      
     #Add user
     def add_user(self,username):
@@ -41,9 +39,9 @@ class OTPgeneration:
     def delete_user(self, username):
         if username in self.users:
             del self.users[username]
-            print(f"User {username} deleted successfully.")
+            print("User " + username + " deleted successfully.")
         else:
-            print(f"User {username} not found.")
+            print("User " + username + " not found.")
     
     #Generate OTP for each user
     def generateOTP(self,username):
