@@ -46,9 +46,10 @@ Documentation<br>
 * updates on the work units, including any changes in approach, results of evaluations, etc. as appropriate.(Done individually)<br>
 
 ---------------------------------------
-Work Updates:
+Work Updates:<br>
+Make File has been created but some features are not working so it requires fixing.<br>
 
-Back end Development:
+Back end Development:<br>
 Part 1:<br>
 Base code for OTPgeneration completed. Working on test file for OTP geenration.
 
