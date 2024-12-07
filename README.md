@@ -24,6 +24,7 @@ Part 2: Implement OTP Validation<br>
 Responsibilities:<br>
 OTP Validation: Implement the function that takes an OTP input from the user and validates it against the generated OTP.<br>
 Match Check: Compare the user input with the stored/generated OTP.<br>
+(i) checking the OTP is only digit
 Expiry Validation (Optional): If you implemented expiry in OTP generation, Member 2 would also handle expiry validation (checking if the OTP has expired).(If implemented in Phase 2, handle OTP expiry)<br>
 Error Handling: Handle incorrect or expired OTP scenarios. Provide feedback to the user when the OTP is invalid or expired(phase2).<br>
 Deliverables:<br>
