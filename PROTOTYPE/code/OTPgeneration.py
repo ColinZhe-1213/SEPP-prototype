@@ -19,17 +19,17 @@ class OTPgeneration:
         return pyotp.random_base32()
     
     # Encrypt OTP Secret
-    def encrypt_OTPsecret(self, OTP):
+    def encrypt_OTPsecret(self,OTP):
         encrypted = self.fernet.encrypt(OTP.encode())
         return encrypted
     
     # Decrypt OTP Secret
-    def decrypt_OTPsecret(self, OTP):
+    def decrypt_OTPsecret(self,OTP):
         decrypted = self.fernet.decrypt(OTP)
         return decrypted.decode()
      
     # Add user
-    def add_user(self, username):
+    def add_user(self,username):
         if username in self.users:
             print("User " + username + " already exists.")
         else:
@@ -51,7 +51,7 @@ class OTPgeneration:
             print("User " + username + " not found.")
     
     # Generate OTP for each user
-    def generateOTP(self, username):
+    def generateOTP(self,username):
         if username not in self.users:
             print("Username not found")
             return None
