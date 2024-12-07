@@ -13,8 +13,7 @@ class OTPgeneration:
         self.data_file_path = os.path.join(os.getcwd(), "data", "userdata.json")
         self.load_user_data()
         atexit.register(self.reset_json_data)
-        
-    # Generate random OTP secret
+
     # Generate random OTP secret
     def generate_OTPsecret(self):
         return pyotp.random_base32()
