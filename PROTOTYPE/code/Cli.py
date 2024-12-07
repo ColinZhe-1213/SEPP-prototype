@@ -52,7 +52,7 @@ class CLI:
     def generate_otp(self):
         username = input("Enter username for OTP generation: ").strip()
         if username in self.users:
-            otp = self.otp_handler.generate()  # 需要实际实现
+            otp = self.otp_handler.generate()  
             print(f"OTP for {username}: {otp}")
         else:
             print(f"User {username} not found.")
