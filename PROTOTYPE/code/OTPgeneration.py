@@ -7,6 +7,7 @@ import json
 class OTPgeneration:
     # Initialize
     def __init__(self):
+    def __init__(self):
         self.key = Fernet.generate_key()
         self.fernet = Fernet(self.key)
         self.users = {}
@@ -15,9 +16,12 @@ class OTPgeneration:
         atexit.register(self.reset_json_data)
         
     # Generate random OTP secret
+    # Generate random OTP secret
     def generate_OTPsecret(self):
         return pyotp.random_base32()
     
+    # Encrypt OTP Secret
+    def encrypt_OTPsecret(self, OTP):
     # Encrypt OTP Secret
     def encrypt_OTPsecret(self, OTP):
         encrypted = self.fernet.encrypt(OTP.encode())
@@ -25,9 +29,13 @@ class OTPgeneration:
     
     # Decrypt OTP Secret
     def decrypt_OTPsecret(self, OTP):
+    # Decrypt OTP Secret
+    def decrypt_OTPsecret(self, OTP):
         decrypted = self.fernet.decrypt(OTP)
         return decrypted.decode()
      
+    # Add user
+    def add_user(self, username):
     # Add user
     def add_user(self, username):
         if username in self.users:
@@ -43,6 +51,7 @@ class OTPgeneration:
             print("User " + username + " added successfully.")
     
     # Delete user
+    # Delete user
     def delete_user(self, username):
         if username in self.users:
             del self.users[username]
@@ -50,6 +59,8 @@ class OTPgeneration:
         else:
             print("User " + username + " not found.")
     
+    # Generate OTP for each user
+    def generateOTP(self, username):
     # Generate OTP for each user
     def generateOTP(self, username):
         if username not in self.users:
