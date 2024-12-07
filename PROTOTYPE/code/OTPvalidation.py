@@ -8,6 +8,10 @@ class OTPgeneration:
         if username not in self.users:
             print(f"User {username} not found")
             return False
+        
+        if not input_otp.isdigit():
+            print("！OTP MUST BE DIGIT！")
+            return False
     
         user = self.users[username]
         encrypted_secret = user["secret"]
