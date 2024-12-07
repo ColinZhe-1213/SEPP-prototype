@@ -2,6 +2,7 @@ import unittest
 
 from code.OTPvalidation import OTPgeneration
 
+
 class TestOTPValidation(unittest.TestCase):
     def setUp(self):
         # initialize the environment
