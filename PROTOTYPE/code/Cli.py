@@ -9,6 +9,15 @@ class CLI:
         print("Welcome to Smart Door Unlocking CLI!")
         print("-------------------------------------")
 
+        menu_options = {
+            "1": self.add_user,
+            "2": self.remove_user,
+            "3": self.generate_otp,
+            "4": self.validate_otp,
+            "5": self.list_users,
+            "6": self.exit_program
+        }
+
         while True:
             print("\nMain Menu:")
             print("1. Add a User")
