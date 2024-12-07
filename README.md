@@ -50,11 +50,10 @@ Documentation<br>
 Work Updates:<br>
 Make File has been created but some features are not working so it requires fixing.<br>
 
-Back end Development:
-Part 1:
-Start the skeleton fram for OTP geenration(HOTP method)
-
-
+Back end Development:<br>
+Part 1:<br>
+Complete OTPgeneration (Phase 1). Ensure necesssary functions are working.<br>
+Working on Test Cases.<br>
 
 
 Part 2:<br>
