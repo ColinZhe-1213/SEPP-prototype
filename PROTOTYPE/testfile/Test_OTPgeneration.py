@@ -131,8 +131,4 @@ def test_display_log(test_OTPgeneration, capsys):
     captured = capsys.readouterr()
     assert f"User: {username}" in captured.out
     assert "Counter: 0" in captured.out
-<<<<<<< HEAD
     print("Displayed user log successfully.\n")
-=======
-    print("Displayed user log successfully.\n")
->>>>>>> f10eeb150539e19f7e73d5a5e8a83bb96cfe4399
