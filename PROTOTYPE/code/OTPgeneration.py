@@ -67,12 +67,12 @@ class OTPgeneration:
     
     #Save the user data into JSON
     def save_user_data(self):
-        with open(self.data_file, "w") as f:
+        with open(self.json_filename, "w") as f:
             json.dump(self.users, f, indent=4)
     
     #Load the user data from JSON
     def load_user_data(self):
-        if os.path.exists(self.data_file):
+        if os.path.exists(self.json_filename):
             with open(self.get_file_path(), "r") as file:
                 return json.load(file)
         else:
@@ -83,7 +83,3 @@ class OTPgeneration:
     def display_log(self):
         for username, data in self.users.items():
              print("User: " + username + ", Counter: " + str(data["counter"]) + ", Secret (Encrypted): " + data["secret"])
-
-
-
- 
