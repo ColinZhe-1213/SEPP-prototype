@@ -12,13 +12,13 @@ install:
 # Run tests using unittest
 test:
 	@echo "Running test"
-	$(PYTHON) -m unittest discover $(TEST_DIR)
+	$(PYTHON) -m pytest $(TEST_DIR)
 
 # Clean up temporary files
 clean:
 	@echo "Cleaning files"
-	rm -rf __pycache__ .pytest_cache
-	rm -rf $(SRC_DIR)/__pycache__
+	find . -name "__pycache__" -type d -exec rm -rf {} +
+	find . -name ".pytest_cache" -type d -exec rm -rf {} +
 
 # Lint for identifying code error
 lint:
