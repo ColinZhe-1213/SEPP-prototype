@@ -97,7 +97,6 @@ def test_generateOTP_n_times(test_OTPgeneration):
     print("Test passed: Counter for " + username + ": " + str(otp.users[username]["counter"]) + ".\n")
 
 # Test case for saving and loading user data to a file
-# Test case for saving and loading user data to a file
 def test_save_and_load_user_data(test_OTPgeneration, tmp_path):
     otp = test_OTPgeneration
     username = "user 1"

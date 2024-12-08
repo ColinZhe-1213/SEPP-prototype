@@ -1,11 +1,10 @@
 import pyotp
 from OTPgeneration import OTPgeneration
-
 class OTPvalidation:
 
     #initialize
-    def __init__(self, otp_gen):
-        self.otp_gen = otp_gen
+    def __init__(self, otp_generation_instance):
+        self.otp_gen = otp_generation_instance
 
     def OTP_validation(self,input_otp):
     # validate the OTP format
@@ -29,7 +28,7 @@ class OTPvalidation:
                 print("OTP is valid, smart door unlock")
                 return True
             
-        print("OTP is unvalid ,OTP not found or already used, smart door locked")
+        print("OTP is invalid ,OTP not found or already used, smart door locked")
         return False
 
 
