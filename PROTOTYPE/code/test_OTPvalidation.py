@@ -1,6 +1,6 @@
 import unittest
 
-from code.OTPvalidation import OTPgeneration
+from OTPvalidation import OTPvalidation
 
 
 class TestOTPValidation(unittest.TestCase):

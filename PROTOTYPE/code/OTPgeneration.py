@@ -43,7 +43,6 @@ class OTPgeneration:
             print("User " + username + " added successfully.")
 
     # Delete user
-    # Delete user
     def delete_user(self, username):
         if username in self.users:
             del self.users[username]
