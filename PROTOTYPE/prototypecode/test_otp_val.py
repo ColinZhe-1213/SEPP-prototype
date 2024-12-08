@@ -3,6 +3,7 @@ from OTPgeneration import OTPgeneration
 from OTPvalidation import OTPvalidation
 
 def test_otp_validation():
+def test_otp_validation():
     otp_gen = OTPgeneration()
     otp_gen.add_user("user 1")
     otp_gen.add_user("user 2")
@@ -44,4 +45,3 @@ def test_otp_validation():
     non_numeric_otp = "ABC123"
     assert otp_val.OTP_validation(non_numeric_otp) is False, "OTP should only contain digits"
     print("Test case passed: OTP with non-numeric characters fails.")
-
