@@ -129,3 +129,4 @@ class OTPgeneration:
             print("List of users:")
             for username in self.users:
                 print(f"- {username}")
+                
