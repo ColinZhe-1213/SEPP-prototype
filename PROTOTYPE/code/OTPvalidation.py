@@ -1,6 +1,6 @@
 import pyotp
 
-class OTPgeneration:
+class OTPvalidation:
 
     def OTP_validation(self,username,input_otp):
     # validate the OTP
