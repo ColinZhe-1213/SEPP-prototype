@@ -97,7 +97,6 @@ def test_generateOTP_n_times(test_OTPgeneration):
     print("Test passed: Counter for " + username + ": " + str(otp.users[username]["counter"]) + ".\n")
 
 # Test case for saving and loading user data to a file
-# Test case for saving and loading user data to a file
 def test_save_and_load_user_data(test_OTPgeneration, tmp_path):
     otp = test_OTPgeneration
     username = "user 1"
@@ -141,3 +140,14 @@ def test_display_users_with_users(test_OTPgeneration, capsys):
     for user in added_users:
         assert f"- {user}" in captured.out
     print(f"Test passed: Users are {', '.join(added_users)}.\n")
+    
+# Test case for OTP history
+def test_otp_history(test_OTPgeneration):
+    otp = test_OTPgeneration
+    username = "user 1"
+    otp.add_user(username)
+    otp1 = otp.generateOTP(username)
+    otp2 = otp.generateOTP(username)
+    
+    assert otp.users[username]["OTP_history"] == [otp1, otp2]
+    print("Test passed: OTP history for " + username + ": " + str(otp.users[username]["OTP_history"]) + ".")

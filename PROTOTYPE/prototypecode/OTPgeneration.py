@@ -10,7 +10,6 @@ class OTPgeneration:
         self.key = Fernet.generate_key()
         self.fernet = Fernet(self.key)
         self.users = {}
-        self.used_otps = set()
         self.data_file_path = os.path.join(os.getcwd(), "data", "userdata.json")
         self.load_user_data()
         atexit.register(self.reset_json_data)
@@ -68,6 +67,16 @@ class OTPgeneration:
             self.users[username]["OTP_history"].append(otp)
             self.users[username]["counter"] += 1
             return otp
+    
+    # Mark OTP as used
+    def mark_otp_as_used(self, username, otp):
+        for entry in self.users[username]["OTP_history"]:
+            if entry == otp and otp not in self.used_otps:
+                self.used_otps.add(otp)
+                print("OTP " + otp + " marked as used.")
+                return True
+            print("OTP is already used or invalid.")
+            return False
 
     # Display user data log
     def display_log(self):
