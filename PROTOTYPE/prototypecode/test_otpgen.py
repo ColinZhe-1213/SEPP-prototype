@@ -2,7 +2,7 @@ import pytest
 import os
 import json
 import tempfile
-from OTPgeneration import OTPgeneration
+from prototypecode.OTPgeneration import OTPgeneration
 
 USER_DATA_PATH = os.path.join("code", "data", "userdata.json")
 
@@ -86,7 +86,9 @@ def test_generateOTP_n_times(test_OTPgeneration):
     username = "user 1"
     otp.add_user(username)
     otp1 = otp.generateOTP(username)
+    print(f"Counter after first OTP: {otp.users[username]['counter']}")
     otp2 = otp.generateOTP(username)
+    print(f"Counter after second OTP: {otp.users[username]['counter']}")
     assert otp1 is not None and len(otp1) == 6
     assert otp2 is not None and len(otp2) == 6
     assert otp1 != otp2
@@ -120,6 +122,7 @@ def test_display_log(test_OTPgeneration, capsys):
 # Test case for display empty user
 def test_display_users_empty(test_OTPgeneration, capsys):
     otp = test_OTPgeneration
+    otp.users.clear()
     otp.display_users()
     captured = capsys.readouterr()
     assert "No users available" in captured.out
