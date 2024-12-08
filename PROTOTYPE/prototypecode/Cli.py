@@ -58,7 +58,14 @@ class CLI:
 
     def validate_otp(self):
         otp = input("Enter the OTP to validate: ").strip()
-        self.otp_validator.validate_otp(username, otp)
+        if otp == "":
+            print("OTP cannot be empty!")
+            return
+        is_valid = self.otp_validator.OTP_validation(otp)
+        if is_valid:
+            print(f"The OTP '{otp}' is valid.")
+        else:
+            print(f"The OTP '{otp}' is invalid or expired.")
 
     def list_users(self):
         self.otp_generator.display_users()
