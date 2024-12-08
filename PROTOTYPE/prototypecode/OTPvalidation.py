@@ -16,7 +16,6 @@ class OTPvalidation:
         elif len(input_otp) !=6:
             print("!OTP MUST BE 6 DIGITS!")
             return False
-            return False
         
         for username,user in self.otp_gen.users.items():
             encrypted_secret = user["secret"]
@@ -29,7 +28,7 @@ class OTPvalidation:
                 print("OTP is valid, smart door unlock")
                 return True
             
-        print("OTP is unvalid ,OTP not found or already used, smart door locked")
+        print("OTP is invalid ,OTP not found or already used, smart door locked")
         return False
 
 

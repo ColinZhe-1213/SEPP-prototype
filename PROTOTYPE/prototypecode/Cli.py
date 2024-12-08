@@ -78,7 +78,7 @@ class CLI:
         exit()
         
 otp_generator = OTPgeneration()
-otp_validator = OTPvalidation()
+otp_validator = OTPvalidation(otp_generator)
 cli = CLI(otp_generator, otp_validator)
 
 
