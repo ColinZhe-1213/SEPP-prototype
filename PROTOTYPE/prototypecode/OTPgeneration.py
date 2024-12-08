@@ -67,17 +67,16 @@ class OTPgeneration:
             otp = hotp.at(counter)
             self.users[username]["OTP_history"].append(otp)
             self.users[username]["counter"] += 1
+            self.save_user_data()
             return otp
-    
+            
     # Mark OTP as used
     def mark_otp_as_used(self, username, otp):
-        for entry in self.users[username]["OTP_history"]:
-            if entry == otp and otp not in self.used_otps:
-                self.used_otps.add(otp)
-                print("OTP " + otp + " marked as used.")
-                return True
-            print("OTP is already used or invalid.")
-            return False
+        if otp in self.users[username]["OTP_history"] and otp not in self.used_otps:
+            self.used_otps.add(otp)
+            self.save_user_data()
+            return True
+        return False
 
     # Display user data log
     def display_log(self):
@@ -138,5 +137,5 @@ class OTPgeneration:
         else:
             print("List of users:")
             for username in self.users:
-                print(f"- {username}")
+                print(username)
                 

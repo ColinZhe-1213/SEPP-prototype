@@ -24,13 +24,12 @@ class OTPvalidation:
 
             # Check if OTP matches and hasn't been used
             if input_otp == generated_otp:
-                if input_otp not in self.otp_gen.used_otps:
-                    print(f"OTP is valid for user {username}, smart door unlocked")
-                    self.otp_gen.mark_otp_as_used(username, input_otp)
+                if self.otp_gen.mark_otp_as_used(username, input_otp):
+                    print("The OTP '" + input_otp + "' is valid, smart door unlocked.")
                     return True
                 else:
-                    print("OTP has already been used.")
+                    print("The OTP '" + input_otp + "' has already been used, smart door locked.")
                     return False
 
-        print("OTP is invalid, OTP not found or already used, smart door locked")
+        print("The OTP '" + input_otp + "' is invalid, smart door locked.")
         return False
