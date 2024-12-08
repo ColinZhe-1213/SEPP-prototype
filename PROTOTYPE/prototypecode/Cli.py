@@ -2,13 +2,7 @@ import pyotp
 from OTPgeneration import OTPgeneration
 from OTPvalidation import OTPvalidation
 
-from OTPgeneration import OTPgeneration
-from OTPvalidation import OTPvalidation
-
 class CLI:
-    def __init__(self, otp_generator,otp_validator):
-        self.otp_generator = otp_generator
-        self.otp_validator = otp_validator
     def __init__(self, otp_generator,otp_validator):
         self.otp_generator = otp_generator
         self.otp_validator = otp_validator
@@ -23,8 +17,6 @@ class CLI:
             "3": self.generate_otp,
             "4": self.validate_otp,
             "5": self.list_users,
-            "6": self.display_logs,
-            "7": self.exit_program
             "6": self.display_logs,
             "7": self.exit_program
         }
