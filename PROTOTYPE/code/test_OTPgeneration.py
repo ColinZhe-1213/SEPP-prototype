@@ -2,7 +2,7 @@ import pytest
 import os
 import json
 import tempfile
-from code.OTPgeneration import OTPgeneration
+from OTPgeneration import OTPgeneration
 USER_DATA_PATH = os.path.join("code", "data", "userdata.json")
 
 #Initialise the test
@@ -111,14 +111,14 @@ def test_load_user_data(test_OTPgeneration):
     otp = test_OTPgeneration
     username = "user 1"
     with tempfile.NamedTemporaryFile(delete=False) as testloadoutput:
-        user_data = {username: {"counter": 1, "secret": "dummy_secret"}}
+        user_data = {username: {"counter": 1, "secret": "secret"}}
         testloadoutput.write(json.dumps(user_data).encode())
         testloadoutput.close()
         otp.data_file = testloadoutput.name
     otp.load_user_data()
     assert username in otp.users
     assert otp.users[username]["counter"] == 1
-    assert otp.users[username]["secret"] == "dummy_secret"
+    assert otp.users[username]["secret"] == "secret"
     print("User data for " + username + " saved successfully.\n")
     os.remove(testloadoutput.name)
 
