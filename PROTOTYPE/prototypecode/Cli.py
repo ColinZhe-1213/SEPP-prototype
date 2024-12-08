@@ -26,7 +26,7 @@ class CLI:
             print("1. Add a User")
             print("2. Remove a User")
             print("3. Generate OTP for a User")
-            print("4. Validate OTP for a User")
+            print("4. Validate OTP")
             print("5. List All Users")
             print("6. Display Logs")
             print("7. Exit")

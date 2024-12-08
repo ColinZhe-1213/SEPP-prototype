@@ -1,1 +1,7 @@
-{}
+{
+    "1": {
+        "secret": "Y5NC5PQ37TBYXIPNCEO7WZT2NFHBGFYG",
+        "counter": 0,
+        "OTP_history": []
+    }
+}
