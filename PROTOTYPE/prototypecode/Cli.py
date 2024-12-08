@@ -45,7 +45,6 @@ class CLI:
             return
         self.otp_generator.add_user(username)
 
-
     def remove_user(self):
         username = input("Enter username to remove: ").strip() 
         self.otp_generator.delete_user(username)
@@ -62,10 +61,6 @@ class CLI:
             print("OTP cannot be empty!")
             return
         is_valid = self.otp_validator.OTP_validation(otp)
-        if is_valid:
-            print(f"The OTP '{otp}' is valid.")
-        else:
-            print(f"The OTP '{otp}' is invalid or expired.")
 
     def list_users(self):
         self.otp_generator.display_users()
