@@ -2,3 +2,4 @@ pytest== 8.3.4 #testing
 pyotp>=2.9.0 #generate OTP
 colorama>=0.4.6 #CLI enhancement
 flake8>=6.1.0  # Linting
+cryptography == 44.0.0
