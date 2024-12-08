@@ -16,18 +16,22 @@ class OTPvalidation:
         elif len(input_otp) !=6:
             print("!OTP MUST BE 6 DIGITS!")
             return False
+            return False
         
         for username,user in self.otp_gen.users.items():
             encrypted_secret = user["secret"]
-            counter = user["counter"]
-            secret = self.decrypt_OTPsecret(encrypted_secret)
+            counter_before_increment = user["counter"] - 1
+            secret = self.otp_gen.decrypt_OTPsecret(encrypted_secret)
             hotp = pyotp.HOTP(secret)
+            generated_otp = hotp.at(counter_before_increment)
 
-            if hotp.verify(input_otp, counter):
-                self.otp_gen.users[username]["counter"] += 1
-                print(f"{username} succeessfully validate the OTP .")
+            if input_otp == generated_otp:
+                print("OTP is valid, smart door unlock")
                 return True
-            else:
-                print(f"{username} is failed to validate the OTP.")
-                return False
+            
+        print("OTP is unvalid ,OTP not found or already used, smart door locked")
+        return False
+
+
+
     """if we want to check the OTP has expired or not"""
