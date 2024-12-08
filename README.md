@@ -57,7 +57,7 @@ Working on Test Cases.<br>
 
 
 Part 2:<br>
-
+complete the code of OTP validation(pharse 1) and the part of testfile
 
 
 CLI Interface & User Flow:
