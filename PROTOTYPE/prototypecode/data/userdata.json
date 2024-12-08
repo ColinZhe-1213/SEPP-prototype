@@ -1,1 +1,12 @@
-{}
+{
+    "user1": {
+        "secret": "RI27OYN4PCSQQM7U6G67Y2RWSRHLAVA2",
+        "counter": 0,
+        "OTP_history": []
+    },
+    "user2": {
+        "secret": "BM4WXGIRHHFNP6LRFGZMW6WQ6OM4PCIZ",
+        "counter": 0,
+        "OTP_history": []
+    }
+}
