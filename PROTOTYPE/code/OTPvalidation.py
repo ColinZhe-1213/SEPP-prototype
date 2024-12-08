@@ -1,6 +1,10 @@
 import pyotp
 
 class OTPvalidation:
+    #initialize
+    def __init__(self, users):
+        self.users = users
+
 
     def OTP_validation(self,username,input_otp):
     # validate the OTP
@@ -9,13 +13,16 @@ class OTPvalidation:
             print(f"User {username} not found")
             return False
         
+        #OTP SHOULD BE 6 DIGIT 
         if not input_otp.isdigit():
-            print("！OTP MUST BE DIGIT！")
+            print("!OTP MUST BE DIGIT！")
             return False
+        elif len(input_otp) !=6:
+            print("!OTP MUST BE 6 DIGITS!")
     
         user = self.users[username]
         encrypted_secret = user["secret"]
-        counter = user["counter"]-1
+        counter = user["counter"]
         secret = self.decrypt_OTPsecret(encrypted_secret)
 
         hotp = pyotp.HOTP(secret)
