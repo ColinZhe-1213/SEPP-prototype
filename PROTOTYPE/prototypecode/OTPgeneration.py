@@ -70,7 +70,6 @@ class OTPgeneration:
             self.save_user_data()
             return otp
             
-    
     # Mark OTP as used
     def mark_otp_as_used(self, username, otp):
         if otp in self.users[username]["OTP_history"] and otp not in self.used_otps:
@@ -138,5 +137,5 @@ class OTPgeneration:
         else:
             print("List of users:")
             for username in self.users:
-                print(f"- {username}")
+                print(username)
                 
