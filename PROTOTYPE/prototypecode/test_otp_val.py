@@ -3,6 +3,7 @@ from OTPgeneration import OTPgeneration
 from OTPvalidation import OTPvalidation
 
 def test_otp_validation():
+def test_otp_validation():
     otp_gen = OTPgeneration()
     otp_gen.add_user("user 1")
     otp_gen.add_user("user 2")
