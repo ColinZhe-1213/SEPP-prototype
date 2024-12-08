@@ -15,7 +15,6 @@ class OTPvalidation:
         elif len(input_otp) !=6:
             print("!OTP MUST BE 6 DIGITS!")
         
-    
         user = self.users[username]
         encrypted_secret = user["secret"]
         counter = user["counter"]

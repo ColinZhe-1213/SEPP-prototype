@@ -94,7 +94,7 @@ def test_generateOTP_n_times(test_OTPgeneration):
     print("Test passed: Generated OTPs for user " + username + ": " + otp1 + " and " + otp2 + ".\n")
     print("Test passed: Counter for " + username + ": " + str(otp.users[username]["counter"]) + ".\n")
 
-# Test case for saving  and loading user data to a file
+# Test case for saving and loading user data to a file
 def test_save_and_load_user_data(test_OTPgeneration, tmp_path):
     otp = test_OTPgeneration
     username = "user 1"
@@ -116,3 +116,24 @@ def test_display_log(test_OTPgeneration, capsys):
     captured = capsys.readouterr()
     assert "User: user1" in captured.out
     print("Test passed: User log displayed correctly.\n")
+    
+# Test case for display empty user
+def test_display_users_empty(test_OTPgeneration, capsys):
+    otp = test_OTPgeneration
+    otp.display_users()
+    captured = capsys.readouterr()
+    assert "No users available" in captured.out
+    print("Test passed: There is no users.\n")
+
+# Test case for display user with users
+def test_display_users_with_users(test_OTPgeneration, capsys):
+    otp = test_OTPgeneration
+    added_users = ["user1", "user2"]
+    for user in added_users:
+        otp.add_user(user)
+    otp.display_users()
+    captured = capsys.readouterr()
+    assert "List of users:" in captured.out
+    for user in added_users:
+        assert f"- {user}" in captured.out
+    print(f"Test passed: Users are {', '.join(added_users)}.\n")

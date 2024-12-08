@@ -117,3 +117,12 @@ class OTPgeneration:
         with open(self.data_file_path, "w") as f:
             json.dump({}, f, indent=4)
         print("Clear User data.")
+    
+    # Display users
+    def display_users(self):
+        if not self.users:
+            print("No users available.")
+        else:
+            print("List of users:")
+            for username in self.users:
+                print(f"- {username}")
