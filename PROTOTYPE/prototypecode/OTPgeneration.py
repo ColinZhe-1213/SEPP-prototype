@@ -10,6 +10,7 @@ class OTPgeneration:
         self.key = Fernet.generate_key()
         self.fernet = Fernet(self.key)
         self.users = {}
+        self.used_otps = set()
         self.data_file_path = os.path.join(os.getcwd(), "data", "userdata.json")
         self.load_user_data()
         atexit.register(self.reset_json_data)
@@ -128,3 +129,4 @@ class OTPgeneration:
             print("List of users:")
             for username in self.users:
                 print(f"- {username}")
+                
