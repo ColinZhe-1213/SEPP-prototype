@@ -1,5 +1,4 @@
 import unittest
-
 from OTPvalidation import OTPvalidation
 
 
