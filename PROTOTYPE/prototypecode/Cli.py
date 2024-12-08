@@ -57,7 +57,6 @@ class CLI:
             print("OTP for " + username + " is " + otp + ".")
 
     def validate_otp(self):
-        username = input("Enter username for OTP validation: ").strip()
         otp = input("Enter the OTP to validate: ").strip()
         self.otp_validator.validate_otp(username, otp)
 

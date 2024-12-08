@@ -41,17 +41,19 @@ class OTPgeneration:
                 "OTP_history": []
             }
             print("User " + username + " added successfully.")
+            self.save_user_data()
 
     # Delete user
     def delete_user(self, username):
         if username in self.users:
             del self.users[username]
             print("User " + username + " deleted successfully.")
+            self.save_user_data()
         else:
             print("User " + username + " not found.")
     
     # Generate OTP for each user
-    def generateOTP(self,username):
+    def generateOTP(self, username):
         if username not in self.users:
             print("Username not found")
             return None
@@ -65,7 +67,7 @@ class OTPgeneration:
             self.users[username]["OTP_history"].append(otp)
             self.users[username]["counter"] += 1
             return otp
-    
+
     # Display user data log
     def display_log(self):
         for username, data in self.users.items():
