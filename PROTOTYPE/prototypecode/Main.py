@@ -1,4 +1,12 @@
-import pyotp
+from OTPgeneration import OTPgeneration
+from OTPvalidation import OTPvalidation
+from Cli import CLI
 
-new_secret = pyotp.random_base32()
-print(f"Generated Secret: {new_secret}")
+def main():
+    otp_generator = OTPgeneration()
+    otp_validator = OTPvalidation()
+    cli = CLI(otp_generator, otp_validator)
+    cli.display_menu()
+
+if __name__ == "__main__":
+    main()

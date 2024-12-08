@@ -12,7 +12,7 @@ install:
 # Run tests using pytest
 test:
 	@echo "Running tests"
-	export PYTHONPATH=$(PWD)/PROTOTYPE/prototypecode && $(PYTHON) -m pytest $(TEST_DIR)
+	export PYTHONPATH=$(PWD)/PROTOTYPE/prototypecode && $(PYTHON) -m pytest -s $(TEST_DIR)
 
 # Clean up temporary files
 clean:
@@ -38,3 +38,8 @@ validateOTP:
 cli:
 	@echo "Launching CLI"
 	$(PYTHON) $(SRC_DIR)/Cli.py
+
+# Run Main
+main: 
+	@echo "Launching Main"
+	$(PYTHON) $(SRC_DIR)/Main.py
