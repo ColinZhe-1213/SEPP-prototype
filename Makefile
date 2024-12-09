@@ -8,18 +8,14 @@ else ifeq ($(OS), Windows_NT)  # Windows
     PIP := python -m pip
 endif
 
-
 TEST_DIR = PROTOTYPE/prototypecode
 SRC_DIR = PROTOTYPE/prototypecode
 
 # Install dependencies
 install:
 	@echo "Installing dependencies"
-ifeq ($(OS), Windows_NT)
+	$(PIP) install --upgrade pip
 	$(PIP) install -r requirement.txt
-else
-	$(PIP) install -r requirement.txt
-endif
 
 # Run tests using pytest
 test:
