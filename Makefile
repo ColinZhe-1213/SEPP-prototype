@@ -14,6 +14,11 @@ SRC_DIR = PROTOTYPE/prototypecode
 # Install dependencies
 install:
 	@echo "Installing dependencies"
+ifeq ($(OS), Windows_NT)
+	# Windows: Upgrade pip and install dependencies
+	$(PIP) install --upgrade pip
+	$(PIP) install -r requirement.txt
+else
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirement.txt
 
