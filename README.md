@@ -48,16 +48,28 @@ Documentation<br>
 
 ---------------------------------------
 Work Updates:<br>
-Make File has been created but some features are not working so it requires fixing.<br>
+Make File has been fixed with neccessary functions for automations are able to run successfully.<br>
+Main.py has been set up and integrate with CLI.py, OTPgeneration,py and OTPvalidation.py.<br>
+Users are able to start the program with "make main".<br>
 
 Back end Development:<br>
 Part 1:<br>
 Complete OTPgeneration (Phase 1). Ensure necesssary functions are working.<br>
-Working on Test Cases.<br>
+Unit test cases has been done and test shown to be pass successfully.<br>
+Successfully integrate with CLI and OTPvalidation into Main.py<br>
+Phase 1 has been fully completed.(HOTP method).<br>
+Transitioning into Phase 2. (TOTP method).<br>
 
 
 Part 2:<br>
-complete the code of OTP validation(pharse 1) and the part of testfile
+OTP validation (Phase 1) fully completed. Test cases for each functions/ validation cases has been done and pass successfully.<br>
+Successfully integrate with CLI and OTPgeneration into Main.py<br>
+Transitioning into Phase 2. (TOTP method).<br>
 
+CLI Interface:<br>
+CLI Interface has been set up. Integration with neccessary functions are fully integrated.<br>
+(Might add designs/colours to make the interface attractive)(Coming up)<br>
 
-CLI Interface & User Flow:
+Summary
+(8/12/2024) We have completed Phase 1 for our OTP system (HOTP).<br>
+Coming up: we will be using CI/CD as we move in to Phase 2 (HOTP -> TOTP) to help us automate testing, improve code quality, and ensure seamless integration during the migration.<br>
