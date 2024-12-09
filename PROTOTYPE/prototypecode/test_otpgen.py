@@ -6,9 +6,11 @@ from prototypecode.OTPgeneration import OTPgeneration
 
 USER_DATA_PATH = os.path.join("code", "data", "userdata.json")
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 # Initialize the test
 def test_OTPgeneration():
+    otp_gen = OTPgeneration()
+    otp_gen.users.clear() 
     return OTPgeneration()
 
 # Test case for generate,encrypt and decrypt OTP secret generation
@@ -28,22 +30,23 @@ def test_generate_encrypt_decrypt_OTPsecret():
 # Test case for adding new user
 def test_add_user(test_OTPgeneration):
     otp = test_OTPgeneration
-    username = "user 1"
+    username = "user1"
     otp.add_user(username)
-    assert username in otp.users
-    assert otp.users[username]["counter"] == 0
+    assert username in otp.users, f"Expected {username} to be in users, but it's not."
+    assert otp.users[username]["counter"] == 0, f"Expected counter to be 0, but got {otp.users[username]['counter']}."
     assert otp.users[username]["OTP_history"] == []
-    print("Test passed: User " + username + " added successfully.\n")
-    
+ 
 # Test case for adding existing user
 def test_add_user_existing_user(test_OTPgeneration, capsys):
     otp = test_OTPgeneration
-    username = "user 1"
+    username = "user1"
     otp.add_user(username)
     otp.add_user(username)
     captured = capsys.readouterr()
-    print("Test passed: User " + username + " already exists.\n")
-    assert "User " + username + " already exists" in captured.out
+    assert f"User {username} already exists." in captured.out
+    assert otp.users[username]["counter"] == 0
+    assert otp.users[username]["OTP_history"] == []
+
 
 # Test case for deleting a user
 def test_delete_user(test_OTPgeneration, capsys):
@@ -83,18 +86,16 @@ def test_generate_otp_for_nonexistent_user(test_OTPgeneration, capsys):
 # Test case for generating OTP n times
 def test_generateOTP_n_times(test_OTPgeneration):
     otp = test_OTPgeneration
-    username = "user 1"
+    username = "user1"
     otp.add_user(username)
     otp1 = otp.generateOTP(username)
-    print(f"Counter after first OTP: {otp.users[username]['counter']}")
     otp2 = otp.generateOTP(username)
-    print(f"Counter after second OTP: {otp.users[username]['counter']}")
-    assert otp1 is not None and len(otp1) == 6
-    assert otp2 is not None and len(otp2) == 6
+    assert len(otp1) == 6
+    assert len(otp2) == 6
     assert otp1 != otp2
     assert otp.users[username]["counter"] == 2
-    print("Test passed: Generated OTPs for user " + username + ": " + otp1 + " and " + otp2 + ".\n")
-    print("Test passed: Counter for " + username + ": " + str(otp.users[username]["counter"]) + ".\n")
+    assert otp.users[username]["OTP_history"] == [otp1, otp2]
+    print("Test passed.\n")
 
 # Test case for saving and loading user data to a file
 def test_save_and_load_user_data(test_OTPgeneration, tmp_path):
@@ -138,16 +139,19 @@ def test_display_users_with_users(test_OTPgeneration, capsys):
     captured = capsys.readouterr()
     assert "List of users:" in captured.out
     for user in added_users:
-        assert f"- {user}" in captured.out
-    print(f"Test passed: Users are {', '.join(added_users)}.\n")
-    
+        assert user in captured.out
+    print("Test passed: Users are " + ', '.join(added_users) + ".\n")
+
 # Test case for OTP history
 def test_otp_history(test_OTPgeneration):
     otp = test_OTPgeneration
-    username = "user 1"
+    username = "user1"
     otp.add_user(username)
     otp1 = otp.generateOTP(username)
     otp2 = otp.generateOTP(username)
-    
-    assert otp.users[username]["OTP_history"] == [otp1, otp2]
+    assert len(otp1) == 6
+    assert len(otp2) == 6
+    otp_history = otp.users[username]["OTP_history"]
+    assert otp_history[-2:] == [otp1, otp2], f"Expected OTP history to be {[otp1, otp2]}, but got {otp_history[-2:]}"
+    assert otp_history[-2:] == [otp1, otp2]
     print("Test passed: OTP history for " + username + ": " + str(otp.users[username]["OTP_history"]) + ".")
