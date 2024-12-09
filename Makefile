@@ -8,7 +8,6 @@ else ifeq ($(OS), Windows_NT)  # Windows
     PIP := python -m pip
 endif
 
-
 TEST_DIR = PROTOTYPE/prototypecode
 SRC_DIR = PROTOTYPE/prototypecode
 
