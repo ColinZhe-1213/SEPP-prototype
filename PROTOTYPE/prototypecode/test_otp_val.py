@@ -2,6 +2,10 @@ import pytest
 from OTPgeneration import OTPgeneration
 from OTPvalidation import OTPvalidation
 
+import pytest
+from prototypecode.OTPgeneration import OTPgeneration
+from prototypecode.OTPvalidation import OTPvalidation
+ 
 def test_otp_validation():
     otp_gen = OTPgeneration()
     otp_gen.add_user("user 1")
@@ -15,10 +19,10 @@ def test_otp_validation():
     otp_val = OTPvalidation(otp_gen)
     print("Testing OTP validation...")
     
-    assert otp_val.OTP_validation(otp1_user1) is True, "Valid OTP for user1 failed"
+    assert otp_val.OTP_validation(otp1_user1) is True, "Valid OTP for user 1 failed"
     print("Test case passed: OTP for user 1 is valid.")
     
-    assert otp_val.OTP_validation(otp1_user2) is True, "Valid OTP for user2 failed"
+    assert otp_val.OTP_validation(otp1_user2) is True, "Valid OTP for user 2 failed"
     print("Test case passed: OTP for user 2 is valid.")
     
     invalid_otp = "123456"
