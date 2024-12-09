@@ -5,7 +5,7 @@ ifeq ($(OS), Darwin)  # macOS
     PIP := pip3
 else ifeq ($(OS), Windows_NT)  # Windows
     PYTHON := python
-    PIP := pip
+    PIP := python -m pip
 endif
 
 
