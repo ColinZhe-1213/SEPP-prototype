@@ -1,12 +1,6 @@
-# Detect OS and download Python environment settings
-OS := $(shell uname -s)
-ifeq ($(OS), Darwin)  # macOS
-    PYTHON := python3.12
-    PIP := pip3
-else ifeq ($(OS), Windows_NT)  # Windows
-    PYTHON := python
-    PIP := python -m pip
-endif
+# Python environment
+PYTHON := python3.12
+PIP := pip3
 
 TEST_DIR = PROTOTYPE/prototypecode
 SRC_DIR = PROTOTYPE/prototypecode
@@ -14,33 +8,19 @@ SRC_DIR = PROTOTYPE/prototypecode
 # Install dependencies
 install:
 	@echo "Installing dependencies"
-ifeq ($(OS), Windows_NT)
-	# Windows: Upgrade pip and install dependencies
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirement.txt
-else
-	$(PIP) install --upgrade pip
-	$(PIP) install -r requirement.txt
-endif
 
 # Run tests using pytest
 test:
 	@echo "Running tests"
-ifeq ($(OS), Windows_NT)
-	set PYTHONPATH=$(TEST_DIR) && $(PYTHON) -m pytest -s $(TEST_DIR)
-else
 	export PYTHONPATH=$(PWD)/$(TEST_DIR) && $(PYTHON) -m pytest -s $(TEST_DIR)
-endif
 
 # Clean up temporary files
 clean:
 	@echo "Cleaning files"
-ifeq ($(OS), Windows_NT)
-	del /S /Q __pycache__ .pytest_cache
-else
 	find . -name "__pycache__" -type d -exec rm -rf {} +
 	find . -name ".pytest_cache" -type d -exec rm -rf {} +
-endif
 
 # Run OTP generation script
 generateOTP:
@@ -62,7 +42,7 @@ main:
 	@echo "Launching Main"
 	$(PYTHON) $(SRC_DIR)/Main.py
 
-#S Show help
+# Show help
 .PHONY: help
 help:
 	@echo "Available targets:"
