@@ -19,10 +19,8 @@ ifeq ($(OS), Windows_NT)
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirement.txt
 else
-	# macOS/Linux: Upgrade pip and install dependencies
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirement.txt
-endif
 
 # Run tests using pytest
 test:
