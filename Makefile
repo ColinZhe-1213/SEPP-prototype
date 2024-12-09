@@ -21,6 +21,7 @@ ifeq ($(OS), Windows_NT)
 else
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirement.txt
+endif
 
 # Run tests using pytest
 test:
