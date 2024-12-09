@@ -32,6 +32,3 @@ jobs:
 
     - name: Clean up
       run: make clean
-
-    - name: Run program
-      run: make main
