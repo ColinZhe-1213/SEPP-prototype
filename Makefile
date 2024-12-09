@@ -15,7 +15,11 @@ SRC_DIR = PROTOTYPE/prototypecode
 # Install dependencies
 install:
 	@echo "Installing dependencies"
-	$(PIP) install -r requirement.txt
+ifeq ($(OS), Windows_NT)
+	$(PIP) install -r requirements.txt
+else
+	$(PIP) install -r requirements.txt
+endif
 
 # Run tests using pytest
 test:
