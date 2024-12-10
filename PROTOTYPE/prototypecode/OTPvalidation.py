@@ -13,7 +13,7 @@ class OTPvalidation:
         elif len(input_otp) != 6:
             print("!OTP MUST BE 6 DIGITS!")
             return False
-
+        
         # Loop through all users to check if the OTP is valid for any user
         for username, user in self.otp_gen.users.items():
             encrypted_secret = user["secret"]
