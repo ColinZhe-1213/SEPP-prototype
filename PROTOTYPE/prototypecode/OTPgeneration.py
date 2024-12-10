@@ -3,6 +3,7 @@ from cryptography.fernet import Fernet
 import os
 import atexit
 import json
+import datetime
 
 class OTPgeneration:
     # Initialize
@@ -65,25 +66,59 @@ class OTPgeneration:
             secret = self.decrypt_OTPsecret(encrypted_secret)
             hotp = pyotp.HOTP(secret)
             otp = hotp.at(counter)
-            self.users[username]["OTP_history"].append(otp)
+            generation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            otp_entry = {
+                "otp": otp,
+                "generated_at": generation_time,
+                "validated_at": "Not yet validated",
+                "status": "active"
+            }
+            self.users[username]["OTP_history"].append(otp_entry)
+            if len(self.users[username]["OTP_history"]) > 1:
+                self.users[username]["OTP_history"][0]["status"] = "active"
+                for otp_entry in self.users[username]["OTP_history"][:-1]:
+                    if otp_entry["validated_at"] == "Not yet validated":
+                        otp_entry["status"] = "expired"
             self.users[username]["counter"] += 1
             self.save_user_data()
             return otp
             
     # Mark OTP as used
     def mark_otp_as_used(self, username, otp):
-        if otp in self.users[username]["OTP_history"] and otp not in self.used_otps:
-            self.used_otps.add(otp)
-            self.save_user_data()
-            return True
+        for otp_entry in self.users[username]["OTP_history"]:
+            if otp_entry["otp"] == otp:
+                if otp_entry["validated_at"] == "Not yet validated":
+                    validation_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    otp_entry["validated_at"] = validation_time
+                    otp_entry["status"] = "validated"
+                    self.used_otps.add(otp)
+                    self.save_user_data()
+                    return True
+                else:
+                    print("OTP already validated.")
+                    return False
+        print("OTP is invalid.")
         return False
 
     # Display user data log
     def display_log(self):
-        for username, data in self.users.items():
-            otp_history = ', '.join(data["OTP_history"]) if data["OTP_history"] else "No OTPs generated yet"
-            print(f"User: {username}, Counter: {data['counter']}, Secret (Encrypted): {data['secret']}, OTP History: {otp_history}")
-    
+        if not self.users:
+            print("No users logs available.")
+        else:
+            for username, data in self.users.items():
+                if data["OTP_history"]:
+                    otp_history = ""
+                    for otp_entry in data["OTP_history"]:
+                        status = otp_entry["status"]
+                        if status == "expired":
+                            status_message = "Expired"
+                        else:
+                            status_message = "Validated at: " + otp_entry.get("validated_at", "Not yet validated")
+                        otp_history += otp_entry["otp"] + " (Generated at: " + otp_entry["generated_at"] + ", " + status_message + ") \n"
+                else:
+                    otp_history = "No OTPs generated yet"
+                print("User: " + username + ", \nCounter: " + str(data['counter']) + ", \nSecret (Encrypted): " + data['secret'].decode() + ",\OTP History: " + otp_history)
+       
     # Reset user data
     def reset_json_data(self):
         self.save_user_data()
