@@ -1,15 +1,16 @@
 import pyotp
 from OTPgeneration import OTPgeneration
 from OTPvalidation import OTPvalidation
-
+from colorama import Fore, Style
+from colorama import init
 class CLI:
     def __init__(self, otp_generator,otp_validator):
         self.otp_generator = otp_generator
         self.otp_validator = otp_validator
 
     def display_menu(self):
-        print("Welcome to the simulated environment!")
-        print("-------------------------------------")
+        print(Fore.CYAN + "Welcome to the simulated environment!")
+        print(Fore.CYAN + "-------------------------------------")
 
         menu_options = {
             "1": self.add_user,
@@ -22,43 +23,43 @@ class CLI:
         }
 
         while True:
-            print("\nMain Menu:")
-            print("1. Add a User")
-            print("2. Remove a User")
-            print("3. Generate OTP for a User")
-            print("4. Validate OTP")
-            print("5. List All Users")
-            print("6. Display Logs")
-            print("7. Exit")
-            choice = input("Please enter your choice: ")
+            print(Fore.LIGHTWHITE_EX + "\nPlease select an option:\n")
+            print(Fore.GREEN + "1. Add a User")
+            print(Fore.GREEN + "2. Remove a User")
+            print(Fore.GREEN + "3. Generate OTP for a User")
+            print(Fore.GREEN + "4. Validate OTP")
+            print(Fore.GREEN + "5. List All Users")
+            print(Fore.GREEN + "6. Display Logs")
+            print(Fore.GREEN + "7. Exit\n")
+            choice = input(Fore.LIGHTRED_EX + "Please enter your choice: " +Fore.WHITE)
 
             action = menu_options.get(choice)
             if action:
                 action()
             else:
-                print("Invalid choice. Please try again.")
+                print(Fore.LIGHTMAGENTA_EX + "Invalid choice. Please try again.")
 
     def add_user(self):
-        username = input("Enter username to add: ").strip()
+        username = input(Fore.LIGHTYELLOW_EX + "Enter username to add: " + Fore.RESET).strip()
         if username == "":
-            print("Username cannot be empty!")
+            print(Fore.MAGENTA + "Username cannot be empty!")
             return
         self.otp_generator.add_user(username)
 
     def remove_user(self):
-        username = input("Enter username to remove: ").strip() 
+        username = input(Fore.LIGHTYELLOW_EX + "Enter username to remove: " + Fore.RESET).strip() 
         self.otp_generator.delete_user(username)
 
     def generate_otp(self):
-        username = input("Enter username for OTP generation: ").strip()
+        username = input(Fore.LIGHTYELLOW_EX + "Enter username for OTP generation: " + Fore.RESET).strip()
         otp = self.otp_generator.generateOTP(username)
         if otp:
-            print("OTP for " + username + " is " + otp + ".")
+            print(Fore.LIGHTMAGENTA_EX + "OTP for " + username + " is " + otp + "." + Fore.RESET)
 
     def validate_otp(self):
-        otp = input("Enter the OTP to validate: ").strip()
+        otp = input(Fore.LIGHTYELLOW_EX + "Enter the OTP to validate: " + Fore.RESET).strip()
         if otp == "":
-            print("OTP cannot be empty!")
+            print(Fore.LIGHTMAGENTA_EX + "OTP cannot be empty!" + Fore.RESET)
             return
         is_valid = self.otp_validator.OTP_validation(otp)
 
@@ -69,7 +70,7 @@ class CLI:
         self.otp_generator.display_log()
 
     def exit_program(self):
-        print("Exiting the environment. Goodbye!")
+        print(Fore.LIGHTBLUE_EX + "Goodbye!\n" + Fore.RESET)
         exit()
         
 otp_generator = OTPgeneration()
