@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [macos]
 
     steps:
     - name: Checkout code
@@ -23,14 +23,28 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.12
+    
+    - name: Install Docker
+      run: |
+        brew install --cask docker
+        open /Applications/Docker.app
+        while ! docker system info > /dev/null 2>&1; do
+          echo "Waiting for Docker to start..."
+          sleep 5
+        done
+        docker --version
+    
+    - name: Build Docker image
+      run: docker build -t prototype .
 
     - name: Upgrade pip
       run: python -m pip install --upgrade pip
+
     - name: Install dependencies
-      run: make install
+      run: docker run --rm -v ${{ github.workspace }}:/app -w /app prototype make install
 
     - name: Run tests
-      run: make test
+      run: docker run --rm -v ${{ github.workspace }}:/app -w /app prototype make test
 
     - name: Clean up
-      run: make clean
+      run: docker run --rm -v ${{ github.workspace }}:/app -w /app prototype make clean
