@@ -1,0 +1,5 @@
+_pycache_/
+*.pycache #ignore compiled files
+*.pyo
+*.log
+.git/

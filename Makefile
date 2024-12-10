@@ -1,50 +1,62 @@
+# Docker configuration
+DOCKER_IMAGE = prototype
+DOCKER_RUN = docker run --rm -it -v $(PWD):/app -w /app $(DOCKER_IMAGE)
+
+
 # Python environment
 PYTHON := python3.12
 PIP := pip3
 
-TEST_DIR = PROTOTYPE/prototypecode
+# Directories
 SRC_DIR = PROTOTYPE/prototypecode
+TEST_DIR = PROTOTYPE/prototypecode
 
-# Install dependencies
+# Build Docker image
+docker-build:
+	@echo "Building Docker image"
+	docker build -t $(DOCKER_IMAGE) .
+
+# Install dependencies inside Docker container
 install:
 	@echo "Installing dependencies"
-	$(PIP) install -r requirement.txt
+	$(DOCKER_RUN) $(PIP) install -r requirements.txt
 
 # Run tests using pytest
 test:
 	@echo "Running tests"
-	export PYTHONPATH=$(PWD)/$(TEST_DIR) && $(PYTHON) -m pytest -s $(TEST_DIR)
+	$(DOCKER_RUN) sh -c "export PYTHONPATH=$(PWD)/$(TEST_DIR) && $(PYTHON) -m pytest -s $(TEST_DIR)"
 
 # Clean up temporary files
 clean:
 	@echo "Cleaning files"
-	find . -name "__pycache__" -type d -exec rm -rf {} +
-	find . -name ".pytest_cache" -type d -exec rm -rf {} +
+	$(DOCKER_RUN) sh -c "find . -name '__pycache__' -type d -exec rm -rf {} +"
+	$(DOCKER_RUN) sh -c "find . -name '.pytest_cache' -type d -exec rm -rf {} +"
 
 # Run OTP generation script
 generateOTP:
 	@echo "Generating OTP"
-	$(PYTHON) $(SRC_DIR)/OTPgeneration.py
+	$(DOCKER_RUN) $(PYTHON) $(SRC_DIR)/OTPgeneration.py
 
 # Run OTP validation script
 validateOTP:
 	@echo "Validating OTP"
-	$(PYTHON) $(SRC_DIR)/OTPvalidation.py
+	$(DOCKER_RUN) $(PYTHON) $(SRC_DIR)/OTPvalidation.py
 
 # Run CLI
 cli:
 	@echo "Launching CLI"
-	$(PYTHON) $(SRC_DIR)/Cli.py
+	$(DOCKER_RUN) $(PYTHON) $(SRC_DIR)/Cli.py
 
-# Run Main
-main: 
+# Run Main script
+main:
 	@echo "Launching Main"
-	$(PYTHON) $(SRC_DIR)/Main.py
+	$(DOCKER_RUN) $(PYTHON) $(SRC_DIR)/Main.py
 
 # Show help
 .PHONY: help
 help:
 	@echo "Available targets:"
+	@echo "  docker-build  Build the Docker image"
 	@echo "  install       Install dependencies"
 	@echo "  test          Run tests"
 	@echo "  clean         Clean temporary files"
