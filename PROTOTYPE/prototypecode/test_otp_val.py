@@ -1,8 +1,4 @@
 import pytest
-from OTPgeneration import OTPgeneration
-from OTPvalidation import OTPvalidation
-
-import pytest
 from prototypecode.OTPgeneration import OTPgeneration
 from prototypecode.OTPvalidation import OTPvalidation
  
