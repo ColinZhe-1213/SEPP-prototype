@@ -1,6 +1,6 @@
 # Docker configuration
 DOCKER_IMAGE = prototype
-DOCKER_RUN = docker run --rm -it -v $(PWD):/app -w /app $(DOCKER_IMAGE)
+DOCKER_RUN = docker run --rm -v $(PWD):/app -w /app $(DOCKER_IMAGE)
 
 # Python environment
 PYTHON := python3.12
@@ -23,7 +23,7 @@ install:
 # Run tests using pytest
 test:
 	@echo "Running tests"
-	$(DOCKER_RUN) sh -c "export PYTHONPATH=$(PWD)/$(TEST_DIR) && $(PYTHON) -m pytest -s $(TEST_DIR)"
+	$(DOCKER_RUN) sh -c "export PYTHONPATH=/app/PROTOTYPE/prototypecode && $(PYTHON) -m pytest -s $(TEST_DIR)"
 
 # Clean up temporary files
 clean:
@@ -49,7 +49,7 @@ cli:
 # Run Main script
 main:
 	@echo "Launching Main"
-	$(DOCKER_RUN) $(PYTHON) $(SRC_DIR)/Main.py
+	docker run -it -v $(PWD):/app -w /app prototype python3.12 /app/PROTOTYPE/prototypecode/Main.py
 
 # Show help
 .PHONY: help
