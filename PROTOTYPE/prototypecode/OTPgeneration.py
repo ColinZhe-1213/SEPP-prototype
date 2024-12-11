@@ -4,6 +4,7 @@ import os
 import atexit
 import json
 import datetime
+import datetime
 
 class OTPgeneration:
     # Initialize
@@ -117,7 +118,7 @@ class OTPgeneration:
                         otp_history += otp_entry["otp"] + " (Generated at: " + otp_entry["generated_at"] + ", " + status_message + ") \n"
                 else:
                     otp_history = "No OTPs generated yet"
-                print("User: " + username + ", \nCounter: " + str(data['counter']) + ", \nSecret (Encrypted): " + data['secret'].decode() + ",\OTP History: " + otp_history)
+                print("User: " + username + " \nCounter: " + str(data['counter']) + " \nSecret (Encrypted): " + data['secret'].decode() + "\nOTP History: " + otp_history + "\n")
        
     # Reset user data
     def reset_json_data(self):

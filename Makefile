@@ -2,7 +2,6 @@
 DOCKER_IMAGE = prototype
 DOCKER_RUN = docker run --rm -it -v $(PWD):/app -w /app $(DOCKER_IMAGE)
 
-
 # Python environment
 PYTHON := python3.12
 PIP := pip3
