@@ -12,7 +12,7 @@ USER_DATA_PATH = os.path.join("code", "data", "userdata.json")
 def test_OTPgeneration():
     otp_gen = OTPgeneration()
     otp_gen.users.clear() 
-    return OTPgeneration()
+    return otp_gen
 
 # Test case for generate,encrypt and decrypt OTP secret generation
 def test_generate_encrypt_decrypt_OTPsecret():
@@ -31,7 +31,7 @@ def test_generate_encrypt_decrypt_OTPsecret():
 # Test case for adding new user
 def test_add_user(test_OTPgeneration):
     otp = test_OTPgeneration
-    username = "user1"
+    username = "user 1"
     otp.add_user(username)
     assert username in otp.users, f"Expected {username} to be in users, but it's not."
     assert otp.users[username]["counter"] == 0, f"Expected counter to be 0, but got {otp.users[username]['counter']}."
@@ -40,14 +40,13 @@ def test_add_user(test_OTPgeneration):
 # Test case for adding existing user
 def test_add_user_existing_user(test_OTPgeneration, capsys):
     otp = test_OTPgeneration
-    username = "user1"
+    username = "user 1"
     otp.add_user(username)
     otp.add_user(username)
     captured = capsys.readouterr()
     assert f"User {username} already exists." in captured.out
     assert otp.users[username]["counter"] == 0
     assert otp.users[username]["OTP_history"] == []
-
 
 # Test case for deleting a user
 def test_delete_user(test_OTPgeneration, capsys):
@@ -87,7 +86,7 @@ def test_generate_otp_for_nonexistent_user(test_OTPgeneration, capsys):
 # Test case for generating OTP n times
 def test_generateOTP_n_times(test_OTPgeneration):
     otp = test_OTPgeneration
-    username = "user1"
+    username = "user 1"
     otp.add_user(username)
     otp1 = otp.generateOTP(username)
     otp2 = otp.generateOTP(username)
@@ -95,7 +94,12 @@ def test_generateOTP_n_times(test_OTPgeneration):
     assert len(otp2) == 6
     assert otp1 != otp2
     assert otp.users[username]["counter"] == 2
-    assert otp.users[username]["OTP_history"] == [otp1, otp2]
+    otp_history = otp.users[username]["OTP_history"]
+    assert len(otp_history) == 2
+    assert otp_history[0]["otp"] == otp1
+    assert otp_history[0]["status"] == "expired"
+    assert otp_history[1]["otp"] == otp2
+    assert otp_history[1]["status"] == "active"
     print("Test passed.\n")
 
 # Test case for saving and loading user data to a file
@@ -114,11 +118,11 @@ def test_save_and_load_user_data(test_OTPgeneration, tmp_path):
 # Test case for displaying user logs
 def test_display_log(test_OTPgeneration, capsys):
     otp = test_OTPgeneration
-    username = "user1"
+    username = "user 1"
     otp.add_user(username)
     otp.display_log()
     captured = capsys.readouterr()
-    assert "User: user1" in captured.out
+    assert "User: user 1" in captured.out
     print("Test passed: User log displayed correctly.\n")
     
 # Test case for display empty user
@@ -133,7 +137,7 @@ def test_display_users_empty(test_OTPgeneration, capsys):
 # Test case for display user with users
 def test_display_users_with_users(test_OTPgeneration, capsys):
     otp = test_OTPgeneration
-    added_users = ["user1", "user2"]
+    added_users = ["user 1", "user 2"]
     for user in added_users:
         otp.add_user(user)
     otp.display_users()
@@ -146,13 +150,13 @@ def test_display_users_with_users(test_OTPgeneration, capsys):
 # Test case for OTP history
 def test_otp_history(test_OTPgeneration):
     otp = test_OTPgeneration
-    username = "user1"
+    username = "user 1"
     otp.add_user(username)
     otp1 = otp.generateOTP(username)
     otp2 = otp.generateOTP(username)
     assert len(otp1) == 6
     assert len(otp2) == 6
     otp_history = otp.users[username]["OTP_history"]
-    assert otp_history[-2:] == [otp1, otp2], f"Expected OTP history to be {[otp1, otp2]}, but got {otp_history[-2:]}"
-    assert otp_history[-2:] == [otp1, otp2]
+    otp_values = [entry['otp'] for entry in otp_history]
+    assert otp_values[-2:] == [otp1, otp2], f"Expected OTP history to be {[otp1, otp2]}, but got {otp_values[-2:]}"
     print("Test passed: OTP history for " + username + ": " + str(otp.users[username]["OTP_history"]) + ".")
