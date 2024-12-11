@@ -9,7 +9,7 @@ class CLI:
         self.otp_validator = otp_validator
 
     def display_menu(self):
-        print(Fore.CYAN + "Welcome to the simulated environment!")
+        print(Fore.CYAN + "\nWelcome to the simulated environment!")
         print(Fore.CYAN + "-------------------------------------")
 
         menu_options = {
@@ -31,7 +31,7 @@ class CLI:
             print(Fore.GREEN + "5. List All Users")
             print(Fore.GREEN + "6. Display Logs")
             print(Fore.GREEN + "7. Exit\n")
-            choice = input(Fore.LIGHTRED_EX + "Please enter your choice: " +Fore.WHITE)
+            choice = input(Fore.LIGHTRED_EX + "Please enter your choice: " + Fore.WHITE)
 
             action = menu_options.get(choice)
             if action:
