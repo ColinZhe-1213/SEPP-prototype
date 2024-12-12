@@ -23,12 +23,13 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.12
-    
+
     - name: Install Docker
       run: |
+        sudo apt-get remove -y containerd
         sudo apt-get update
         sudo apt-get install -y docker.io
-  
+
     - name: Build Docker image
       run: docker build -t prototype .
 
