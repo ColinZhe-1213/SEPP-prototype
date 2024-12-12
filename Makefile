@@ -49,8 +49,9 @@ cli:
 # Run Main script
 main:
 	@echo "Launching Main"
-	docker run -it --rm -v $(PWD):/app -w /app prototype python3 /app/PROTOTYPE/prototypecode/Main.py
+	docker run --rm -it -v $(PWD):/app -w /app prototype sh -c "export PYTHONPATH=/app && python3.12 -m PROTOTYPE.prototypecode.Main"
 
+	
 # Show help
 .PHONY: help
 help:
