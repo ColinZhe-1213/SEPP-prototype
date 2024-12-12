@@ -46,7 +46,7 @@ cli:
 	@echo "Launching CLI"
 	$(DOCKER_RUN) $(PYTHON) $(SRC_DIR)/Cli.py
 
-# Run Main script
+# Run Main
 main:
 	@echo "Launching Main"
 	docker run --rm -it -v $(PWD):/app -w /app prototype sh -c "export PYTHONPATH=/app && python3.12 -m PROTOTYPE.prototypecode.Main"
