@@ -1,5 +1,6 @@
 import pyotp
-from OTPgeneration import OTPgeneration
+from .OTPgeneration import OTPgeneration
+
 class OTPvalidation:
     # Initialize
     def __init__(self, otp_generation_instance):
