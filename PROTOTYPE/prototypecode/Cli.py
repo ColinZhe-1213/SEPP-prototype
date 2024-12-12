@@ -1,6 +1,6 @@
 import pyotp
-from OTPgeneration import OTPgeneration
-from OTPvalidation import OTPvalidation
+from PROTOTYPE.prototypecode.OTPgeneration import OTPgeneration
+from PROTOTYPE.prototypecode.OTPvalidation import OTPvalidation
 from colorama import Fore, Style
 from colorama import init
 class CLI:

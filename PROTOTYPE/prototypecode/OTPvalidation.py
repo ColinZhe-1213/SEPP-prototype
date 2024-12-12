@@ -1,5 +1,6 @@
 import pyotp
-from .OTPgeneration import OTPgeneration
+from PROTOTYPE.prototypecode.OTPgeneration import OTPgeneration
+
 
 class OTPvalidation:
     # Initialize

@@ -1,6 +1,6 @@
-from OTPgeneration import OTPgeneration
-from OTPvalidation import OTPvalidation
-from Cli import CLI
+from PROTOTYPE.prototypecode.OTPgeneration import OTPgeneration
+from PROTOTYPE.prototypecode.OTPvalidation import OTPvalidation
+from PROTOTYPE.prototypecode.Cli import CLI
 
 def main():
     otp_generator = OTPgeneration()
