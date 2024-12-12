@@ -10,45 +10,29 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Set up Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+          sudo systemctl start docker
+          sudo systemctl enable docker
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.12
+      - name: Build Docker image
+        run: docker build -t prototype .
 
-    - name: Install Docker
-      run: |
-        sudo apt-get remove -y containerd containerd.io docker docker-engine docker.io
-        sudo apt-get update
-        sudo apt-get install -y \
-          ca-certificates \
-          curl \
-          gnupg \
-          lsb-release
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-        sudo apt-get update
-        sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
 
-    - name: Build Docker image
-      run: docker build -t prototype .
+      - name: Install dependencies
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app prototype make install
 
-    - name: Upgrade pip
-      run: python -m pip install --upgrade pip
+      - name: Run tests
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app prototype make test
 
-    - name: Install dependencies
-      run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}:/app -w /app prototype make install
-
-    - name: Run tests
-      run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}:/app -w /app prototype make test
-
-    - name: Clean up
-      run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}:/app -w /app prototype make clean
+      - name: Clean up
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app prototype make clean
