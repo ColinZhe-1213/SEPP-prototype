@@ -51,7 +51,6 @@ main:
 	@echo "Launching Main"
 	docker run -it --rm -v $(PWD):/app -w /app prototype python3 /app/PROTOTYPE/prototypecode/Main.py
 
-
 # Show help
 .PHONY: help
 help:
