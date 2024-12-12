@@ -20,4 +20,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app
 
 # Set default command to run Main.py
-CMD ["python", "Main.py"]
+CMD ["python", "PROTOTYPE/prototypecode/Main.py"]
